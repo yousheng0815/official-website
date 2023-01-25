@@ -1,0 +1,49 @@
+.main {
+  position: relative;
+
+  .servier {
+    .serviceContainer {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+
+      @media (max-width: 991px) {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+    }
+  }
+
+  .host {
+    background-color: var(--background);
+
+    .annualFeeContainer {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      overflow: hidden;
+      background-color: #fff;
+
+      @media (max-width: 991px) {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  }
+
+  .freeItem {
+    background-color: var(--background);
+
+    .freeItemContainer {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 1rem;
+
+      @media (max-width: 991px) {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .tls {
+        width: 3.8rem;
+      }
+    }
+  }
+}

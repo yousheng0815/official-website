@@ -1,0 +1,127 @@
+.main {
+  position: relative;
+
+  :global(.banner) {
+    padding-top: 220px;
+    padding-bottom: 140px;
+    text-align: unset;
+
+    .brand {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    p {
+      margin-bottom: 30px;
+      margin-right: 45px;
+    }
+
+    .dec {
+      position: relative;
+
+      .decBg {
+        position: absolute;
+        left: -25%;
+        top: -35%;
+        width: 140%;
+        height: 140;
+        z-index: -1;
+      }
+    }
+  }
+
+  .about {
+    p {
+      margin-bottom: 45px;
+    }
+  }
+
+  .advantages {
+    background-color: rgb(247, 247, 247, 0.5);
+
+    .advantageContainer {
+      flex-direction: column;
+
+      div:nth-child(odd) {
+        flex-direction: row-reverse;
+      }
+    }
+  }
+
+  .features {
+    .featuresContainer {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      column-gap: 4rem;
+      row-gap: 5rem;
+      width: 100%;
+      margin-top: 3rem;
+
+      @media (max-width: 991px) {
+        grid-template-columns: 1fr 1fr;
+        column-gap: 4rem;
+      }
+
+      @media (max-width: 767px) {
+        grid-template-columns: 1fr;
+        column-gap: 4rem;
+      }
+    }
+  }
+
+  .contact {
+    background-color: var(--typography);
+
+    .contactContainer {
+      display: flex;
+      align-items: stretch;
+      column-gap: 3rem;
+
+      @media (max-width: 991px) {
+        flex-wrap: wrap;
+      }
+
+      .description {
+        margin-bottom: 2rem;
+      }
+
+      :global(.title) {
+        color: #fff;
+      }
+    }
+  }
+
+  .fr1 {
+    flex: 1;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 1rem;
+  }
+
+  :global(.line) {
+    margin-bottom: 30px;
+  }
+
+  @media (max-width: 991px) {
+    .container {
+      flex-wrap: wrap;
+    }
+
+    .fr1 {
+      flex: 1 0 100%;
+    }
+
+    :global(.banner) {
+      p {
+        margin-right: 0;
+      }
+    }
+  }
+}

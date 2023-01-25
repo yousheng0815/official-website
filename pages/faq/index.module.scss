@@ -1,0 +1,56 @@
+.main {
+  position: relative;
+
+  :global(.banner) {
+    padding-top: 160px;
+    padding-bottom: 100px;
+    text-align: center;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+
+    .item {
+      display: grid;
+      margin-bottom: 0rem;
+
+      .question {
+        font-size: 1.2rem;
+        padding: 1rem 0;
+        color: var(--typography);
+        cursor: pointer;
+
+        .triangle {
+          --size: 6px;
+          margin-right: 1rem;
+          display: inline-block;
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: var(--size) 0 var(--size) var(--size);
+          border-color: transparent transparent transparent var(--typography);
+          transition: 200ms;
+        }
+      }
+
+      .answer {
+        font-size: 1rem;
+        font-weight: 400;
+        color: var(--typography400);
+        height: 0;
+        overflow: hidden;
+        transition: 200ms;
+      }
+
+      &.expanded {
+        .question {
+          .triangle {
+            transform: rotate(90deg);
+          }
+        }
+      }
+    }
+  }
+}

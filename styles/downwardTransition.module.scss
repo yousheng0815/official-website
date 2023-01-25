@@ -1,0 +1,16 @@
+.enter {
+  translate: 0 -30px;
+  opacity: 0;
+}
+
+.enterActive {
+  transition-timing-function: ease-out;
+  translate: 0px;
+  opacity: 1;
+}
+
+.exitActive {
+  transition-timing-function: ease-in;
+  translate: 0 30px;
+  opacity: 0;
+}

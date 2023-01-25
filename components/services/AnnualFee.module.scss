@@ -1,0 +1,48 @@
+.annualFee {
+  font-size: 1rem;
+
+  @media (max-width: 575px) {
+    font-size: 0.7rem;
+  }
+
+  .year {
+    text-align: center;
+    font-size: 1.6em;
+    font-weight: 500;
+    padding: 1rem;
+    color: var(--typography);
+    background-color: #eee;
+  }
+
+  .feeContainer {
+    padding: 3rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      background-color: #eee;
+      left: -1px;
+      width: 1px;
+      top: 15%;
+      bottom: 15%;
+    }
+  }
+
+  .fee {
+    text-align: center;
+    color: var(--primary);
+    font-size: 2.8em;
+    font-weight: 700;
+  }
+
+  .averageFee {
+    margin-top: 0.25rem;
+    color: var(--typography400);
+  }
+}

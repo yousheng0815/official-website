@@ -1,0 +1,28 @@
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: npm
+      - name: Build
+        run: |
+          npm ci
+      - name: Deploy
+        env:
+          REPO_OWNER: yousheng0815
+          REPO_NAME: official-website-content
+          REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+          NEXT_PUBLIC_API_HOSTNAME: ${{ vars.NEXT_PUBLIC_API_HOSTNAME }}
+          NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ vars.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
+        run: |
+          git config --global user.email "actions@github.com" 
+          git config --global user.name "GitHub Actions"
+          npm run deploy

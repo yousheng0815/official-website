@@ -1,0 +1,52 @@
+.advantage {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  column-gap: 2rem;
+  margin: 1.5rem 0;
+
+  .picture {
+    flex: 1;
+
+    svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+
+  .content {
+    flex: 2;
+    padding: 0 2rem;
+
+    .title {
+      color: var(--typography);
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .advantage {
+    margin: 1.5rem 0 5rem 0;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .picture {
+      flex: 0 0 100%;
+      padding: 0 20% 15% 20%;
+    }
+
+    .content {
+      padding: 0;
+
+      .title {
+        text-align: center;
+      }
+    }
+  }
+}

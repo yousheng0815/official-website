@@ -1,0 +1,29 @@
+.service {
+  background: var(#fff);
+  border: 1px solid var(--typography500);
+  padding: 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  color: var(--typography400);
+
+  h2 {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--typography);
+  }
+
+  .price {
+    text-align: center;
+    color: var(--primary);
+    font-size: 2.8rem;
+    font-weight: 700;
+  }
+
+  ul {
+    list-style-type: none;
+    display: grid;
+    row-gap: 1rem;
+  }
+}
