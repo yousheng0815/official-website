@@ -21,6 +21,7 @@ jobs:
           REPO_NAME: official-website-content
           REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
           NEXT_PUBLIC_API_HOSTNAME: ${{ vars.NEXT_PUBLIC_API_HOSTNAME }}
+          NEXT_PUBLIC_CMS_HOSTNAME: ${{ vars.NEXT_PUBLIC_CMS_HOSTNAME }}
           NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ vars.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
         run: |
           git config --global user.email "actions@github.com" 

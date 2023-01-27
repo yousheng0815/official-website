@@ -21,11 +21,11 @@
 
   .contentLayout {
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 1fr;
     gap: 5rem;
 
-    @media (max-width: 767px) {
-      grid-template-columns: 1fr;
+    @media (min-width: 768px) {
+      grid-template-columns: 3fr 1fr;
     }
 
     .listContainer {

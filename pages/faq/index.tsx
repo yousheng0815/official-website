@@ -16,7 +16,7 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-const Blog: NextPage<{ manifest: FaqManifest }> = ({ manifest }) => {
+const Faq: NextPage<{ manifest: FaqManifest }> = ({ manifest }) => {
   const [expandedIdx, setExpandedIdx] = useState<number>()
   const itemsRef = useRef<(HTMLHeadingElement | null)[]>([])
   return (
@@ -76,4 +76,4 @@ const Blog: NextPage<{ manifest: FaqManifest }> = ({ manifest }) => {
   )
 }
 
-export default Blog
+export default Faq

@@ -14,7 +14,7 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-const Blog: NextPage<{ about: AboutPage }> = ({ about }) => {
+const About: NextPage<{ about: AboutPage }> = ({ about }) => {
   return (
     <>
       <Head>
@@ -40,4 +40,4 @@ const Blog: NextPage<{ about: AboutPage }> = ({ about }) => {
   )
 }
 
-export default Blog
+export default About
