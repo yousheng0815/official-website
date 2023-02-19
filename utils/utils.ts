@@ -8,7 +8,7 @@ const BLOG_PAGE_PATH = "pages/blog"
 const FAQ_PAGE_PATH = "pages/faq"
 const DATA_FOLDER_NAME = "data"
 const MANIFEST_FILE_NAME = "manifest.json"
-const INDEX_FILE_NAME = "index.json"
+const INDEX_FILE_NAME = "default.json"
 
 export async function getContent<T>(path: string) {
   const query = await client.query<ContentQuery, ContentQueryVariables>({
