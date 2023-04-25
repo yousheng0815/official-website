@@ -14,9 +14,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const blogManifest = await getBlogManifest()
   return {
     paths: blogManifest
-      ? Object.entries(blogManifest).map(([path]) => ({
+      ? blogManifest.map((entry) => ({
           params: {
-            id: path,
+            id: entry.id,
           },
         }))
       : [],

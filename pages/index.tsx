@@ -115,10 +115,11 @@ const Index: NextPage = () => {
         </Section>
 
         <Section
+          id="contact"
           className={cx(styles.contact)}
           containerClassName={styles.contactContainer}
         >
-          <div id="contact" className={styles.fr1}>
+          <div className={styles.fr1}>
             <Title
               subtitle="聯絡我們"
               title="Who is DigiMedia Agency"

@@ -3,22 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next build && next start",
     "lint": "next lint",
     "gql": "graphql-codegen --config codegen.ts",
     "css": "node .scripts/puslish.ts",
     "publish": "node .scripts/puslish.ts && git add . && git commit --amend -m 'wip' && git push origin HEAD -f",
-    "deploy": "next build && next export && touch out/.nojekyll && echo 'gudetama.tk' >> out/CNAME && git add out/ -f && git commit -m \"Deploy\" && git push origin `git subtree split --prefix out HEAD`:refs/heads/gh-pages --force"
+    "deploy": "next build && next export && touch out/.nojekyll && echo 'yousheng.cf' >> out/CNAME && git add out/ -f && git commit -m \"Deploy\" && git push origin `git subtree split --prefix out HEAD`:refs/heads/gh-pages --force"
   },
   "dependencies": {
     "@apollo/client": "^3.7.0",
-    "classnames": "^2.3.2",
+    "framer-motion": "^10.12.4",
     "next": "12.3.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-transition-group": "^4.4.5"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "2.13.5",
@@ -28,6 +27,7 @@
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
     "@types/react-transition-group": "^4.4.5",
+    "classnames": "^2.3.2",
     "dotenv": "^16.0.3",
     "eslint": "8.24.0",
     "eslint-config-next": "12.3.1",

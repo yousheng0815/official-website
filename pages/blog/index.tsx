@@ -1,11 +1,9 @@
 import Head from "next/head"
 import { GetStaticProps, NextPage } from "next"
 import styles from "./index.module.scss"
-import cx from "classnames"
-import Link from "next/link"
 import { BlogManifest } from "../../utils/types"
 import { getBlogManifest } from "../../utils/utils"
-import { useRef, useState } from "react"
+import { useState } from "react"
 import Sidebar from "../../components/blog/Sidebar"
 import ListItem from "../../components/blog/ListItem"
 import { useRouter } from "next/router"
@@ -52,13 +50,11 @@ const Blog: NextPage<{ manifest: BlogManifest }> = ({ manifest }) => {
           <div className={styles.contentLayout}>
             <section>
               <div className={styles.listContainer}>
-                {Object.entries(manifest)
+                {manifest
+                  .filter((post) => !category || post.category === category)
+                  .filter((post) => !tag || post.tags.includes(tag))
                   .filter(
-                    ([path, post]) => !category || post.category === category
-                  )
-                  .filter(([path, post]) => !tag || post.tags.includes(tag))
-                  .filter(
-                    ([path, post]) =>
+                    (post) =>
                       !title ||
                       post.title
                         .toLocaleLowerCase()
@@ -66,11 +62,10 @@ const Blog: NextPage<{ manifest: BlogManifest }> = ({ manifest }) => {
                   )
                   .sort(
                     (x, y) =>
-                      new Date(y[1].date).getTime() -
-                      new Date(x[1].date).getTime()
+                      new Date(y.date).getTime() - new Date(x.date).getTime()
                   )
-                  .map(([path, post]) => (
-                    <ListItem key={path} path={path} {...post} />
+                  .map((post) => (
+                    <ListItem key={post.id} path={post.id} {...post} />
                   ))}
               </div>
             </section>

@@ -42,7 +42,7 @@ const Preview: NextPage = () => {
     case "faq":
       return <Faq manifest={{ _: values }} />
     case "blog":
-      return <Blog post={values} manifest={{}} />
+      return <Blog post={values} manifest={[]} />
   }
 
   return null

@@ -1,25 +1,15 @@
 import styles from "./Layout.module.scss"
 import cx from "classnames"
-import {
-  FC,
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react"
+import { FC, PropsWithChildren, useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import logo from "../public/images/logo.png"
 import Link from "next/link"
-import { SwitchTransition, CSSTransition } from "react-transition-group"
-import transition from "styles/downwardTransition.module.scss"
 import { useRouter } from "next/router"
-import leftDec from "/public/images/slider-left-dec.jpg"
-
+import { AnimatePresence, AnimationDefinition, motion } from "framer-motion"
 import loadCssModules from "../utils/css-modules"
-loadCssModules()
 
-export const PAGE_TRANSITION_TIMEOUT = 300
+// https://github.com/vercel/next.js/issues/17464
+loadCssModules()
 
 const NAV_LINKS = [
   { href: "/", name: "" },
@@ -29,12 +19,18 @@ const NAV_LINKS = [
   { href: "/blog", name: "部落格" },
 ]
 
+const ANIMATION_INITIAL = { y: 60, opacity: 0 }
+const ANIMATION_ANIMATE = { y: 0, opacity: 1 }
+const ANIMATION_EXIT = { y: -60, opacity: 0 }
+
 interface Props extends PropsWithChildren {}
 const Layout: FC<Props> = ({ children }) => {
   const headerRef = useRef<HTMLDivElement>(null)
   const [isOnTop, setIsOnTop] = useState(true)
+
   useEffect(() => {
     if (!headerRef.current) return
+
     let options = {
       root: null,
       threshold: 0.5,
@@ -46,34 +42,35 @@ const Layout: FC<Props> = ({ children }) => {
     return () => observer.disconnect()
   }, [])
 
-  const router = useRouter()
-  const nodeRef = useRef<HTMLDivElement>(null)
   const [isMobileNavExpanded, setIsMobileNavExpanded] = useState(false)
 
-  const [transitionKey, setTransitionKey] = useState<string>("")
+  const router = useRouter()
+  const oldUrlRef = useRef(getUrl(""))
+  const newUrlRef = useRef(getUrl(router.asPath))
+
   useEffect(() => {
-    const handleRouteChange = (url: string) => {
+    const handlePathChange = (url: string) => {
       setIsMobileNavExpanded(false)
-      setTransitionKey(`${Date.now()}-${url}`)
-    }
-    const handleHashChange = (url: string) => {
-      setIsMobileNavExpanded(false)
-      document
-        .querySelector(new URL(url, window.location.origin).hash || "body")
-        ?.scrollIntoView()
+
+      oldUrlRef.current = newUrlRef.current
+      newUrlRef.current = getUrl(url)
+
+      if (oldUrlRef.current.pathname === newUrlRef.current.pathname) {
+        scrollToTarget(newUrlRef.current.hash)
+      }
     }
 
-    router.events.on("routeChangeStart", handleRouteChange)
-    router.events.on("hashChangeStart", handleHashChange)
+    router.events.on("routeChangeStart", handlePathChange)
+    router.events.on("hashChangeStart", handlePathChange)
 
     return () => {
-      router.events.off("routeChangeStart", handleRouteChange)
-      router.events.off("hashChangeStart", handleRouteChange)
+      router.events.off("routeChangeStart", handlePathChange)
+      router.events.off("hashChangeStart", handlePathChange)
     }
   }, [])
 
   return (
-    <>
+    <div className={styles.root}>
       <header className={styles.header} ref={headerRef}>
         <nav
           className={cx(styles.nav, {
@@ -111,35 +108,38 @@ const Layout: FC<Props> = ({ children }) => {
         </nav>
       </header>
 
-      <div className={styles.SwitchTransition}>
-        <SwitchTransition>
-          <CSSTransition
-            key={transitionKey}
-            timeout={PAGE_TRANSITION_TIMEOUT}
-            onEnter={() => {
-              document
-                .querySelector(window.location.hash || "body")
-                ?.scrollIntoView()
-            }}
-            classNames={{ ...transition }}
-            nodeRef={nodeRef}
-          >
-            <div
-              ref={nodeRef}
-              className={styles.nodeRef}
-              style={{ transitionDuration: `${PAGE_TRANSITION_TIMEOUT}ms` }}
-            >
-              <div className={styles.leftDec}>
-                <Image src={leftDec} alt="" />
-              </div>
-              {children}
-              <footer className={styles.footer}></footer>
-            </div>
-          </CSSTransition>
-        </SwitchTransition>
-      </div>
-    </>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={router.route}
+          initial={ANIMATION_INITIAL}
+          animate={ANIMATION_ANIMATE}
+          exit={ANIMATION_EXIT}
+          transition={{
+            duration: 0.3,
+            ease: "easeOut",
+          }}
+          onAnimationStart={(def) => {
+            if (def === ANIMATION_ANIMATE) {
+              scrollToTarget(newUrlRef.current.hash)
+            }
+          }}
+        >
+          {children}
+        </motion.div>
+      </AnimatePresence>
+
+      <footer className={styles.footer}></footer>
+    </div>
   )
 }
 
 export default Layout
+
+const getUrl = (path: string) => {
+  return new URL(path, "http://dummy")
+}
+
+const scrollToTarget = (hash?: string) => {
+  const target = hash || "body"
+  document.querySelector(target)?.scrollIntoView()
+}

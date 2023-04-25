@@ -1,6 +1,7 @@
-export type BlogManifest = { [path: string]: BlogEntry }
+export type BlogManifest = BlogEntry[]
 
 export type BlogEntry = {
+  id: string
   cover: string
   title: string
   date: string
