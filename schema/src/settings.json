@@ -1,0 +1,12 @@
+{
+  "options": {
+    "category": {
+      "name": "類別",
+      "values": ["堡堡的類別", "Travel"]
+    },
+    "tag": {
+      "name": "Tag",
+      "values": ["堡堡精選", "Food", "Travel", "Design"]
+    }
+  }
+}
