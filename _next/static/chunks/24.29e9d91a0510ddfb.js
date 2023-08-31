@@ -1,0 +1,1 @@
+(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[24],{2024:function(e){e.exports={advantage:"Advantage_advantage__nlJuQ",picture:"Advantage_picture__h78d8",content:"Advantage_content__ydgVs",title:"Advantage_title___2_ye"}}}]);
